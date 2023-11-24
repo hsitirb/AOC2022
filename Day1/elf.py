@@ -9,7 +9,7 @@ class Elf:
         return sum(self.food_list)
 
 
-def elf_with_max_calories(calories_input):
+def calculate_calories_per_elf(calories_input):
     elves = []
     current_elf = Elf()
     for line in calories_input.splitlines():
@@ -18,8 +18,19 @@ def elf_with_max_calories(calories_input):
             current_elf = Elf()
         else:
             current_elf.food_list.append(int(line))
+    elves.append(current_elf)
     calories_list = [elf.get_calories() for elf in elves]
+    return calories_list
+
+def elf_with_max_calories(calories_input):
+    calories_list = calculate_calories_per_elf(calories_input)
     return max(calories_list)
+
+
+def top3_elves_with_max_calories(calories_input):
+    calories_list = calculate_calories_per_elf(calories_input)
+    calories_list.sort(reverse=True)
+    return sum(calories_list[:3])
 
 
 if __name__ == "__main__":
