@@ -36,4 +36,4 @@ def top3_elves_with_max_calories(calories_input):
 if __name__ == "__main__":
     with open("puzzle_input.txt") as f:
         calories_input = f.read()
-    print(elf_with_max_calories(calories_input))
+    print(top3_elves_with_max_calories(calories_input))
