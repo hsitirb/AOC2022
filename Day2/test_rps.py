@@ -5,7 +5,7 @@ from rps import run_rps, RPS
 @pytest.mark.parametrize(
     "strategy, expected",
     [
-        ("A Y\nB X\bC Z", 15),
+        ("A Y\nB X\nC Z", 15),
     ],
 )
 def test_rps_part1(strategy, expected):
