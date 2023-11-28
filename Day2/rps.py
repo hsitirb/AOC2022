@@ -2,13 +2,13 @@ def run_rps(strategy):
     rounds = []
     for line in strategy.splitlines():
         if line:
-            player1, player2 = line.split()
-            p1_map = {"A":"R", "B":"P", "C":"S"}
-            p2_map = {"X":"R", "Y":"P", "Z":"S"}
+            player2, player1 = line.split()
+            p1_map = {"X":"R", "Y":"P", "Z":"S"}
+            p2_map = {"A":"R", "B":"P", "C":"S"}
             play1 = RPS.Play(p1_map[player1])
             play2 = RPS.Play(p2_map[player2])
             rounds.append(RPS.Round(play1, play2).score)
-    return sum(rounds)
+    return rounds
 
 
 class RPS:
@@ -44,4 +44,10 @@ class RPS:
                 "P": "R",
                 "S": "P",
             }[play] == other_play
-            
+
+if __name__ == "__main__":
+    with open("puzzle_input.txt") as f:
+        strategy = f.read()
+    rounds = run_rps(strategy)
+    print(len(rounds))
+    print(sum(rounds))

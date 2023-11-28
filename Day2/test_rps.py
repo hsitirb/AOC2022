@@ -9,7 +9,7 @@ from rps import run_rps, RPS
     ],
 )
 def test_rps_part1(strategy, expected):
-    assert run_rps(strategy) == expected
+    assert sum(run_rps(strategy)) == expected
 
 
 @pytest.mark.parametrize(
@@ -42,3 +42,21 @@ def test_rps_play(player1, player2, expected):
     play1 = RPS.Play(player1)
     play2 = RPS.Play(player2)
     assert RPS.Round(play1, play2).score == expected
+
+def test_win():
+    assert RPS.Round.is_win("R", "S")
+    assert RPS.Round.is_win("P", "R")
+    assert RPS.Round.is_win("S", "P")
+    assert not RPS.Round.is_win("S", "S")
+    assert not RPS.Round.is_win("R", "P")
+    assert not RPS.Round.is_win("P", "S")
+
+def test_win_lose_draw():
+    assert RPS.Round(RPS.Play("R"), RPS.Play("R")).win_lose_draw() == 3
+    assert RPS.Round(RPS.Play("R"), RPS.Play("S")).win_lose_draw() == 6
+    assert RPS.Round(RPS.Play("S"), RPS.Play("R")).win_lose_draw() == 0
+
+def test_score():
+    assert RPS.Round(RPS.Play("P"), RPS.Play("R")).score == 8
+    assert RPS.Round(RPS.Play("R"), RPS.Play("P")).score == 1
+    assert RPS.Round(RPS.Play("S"), RPS.Play("S")).score == 6
