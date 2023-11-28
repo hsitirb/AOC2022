@@ -1,5 +1,5 @@
 import pytest
-from rps import run_rps, RPS
+from rps import run_rps_day1, run_rps_day2, RPS
 
 
 @pytest.mark.parametrize(
@@ -9,7 +9,16 @@ from rps import run_rps, RPS
     ],
 )
 def test_rps_part1(strategy, expected):
-    assert sum(run_rps(strategy)) == expected
+    assert sum(run_rps_day1(strategy)) == expected
+
+@pytest.mark.parametrize(
+    "strategy, expected",
+    [
+        ("A Y\nB X\nC Z", 12),
+    ],
+)
+def test_rps_part2(strategy, expected):
+    assert sum(run_rps_day2(strategy)) == expected
 
 
 @pytest.mark.parametrize(
